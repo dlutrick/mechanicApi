@@ -13,7 +13,7 @@ import com.promineotech.mechanicApi.entity.Vehicle;
 import com.promineotech.mechanicApi.service.VehicleService;
 
 @RestController
-@RequestMapping("/vehicles")
+@RequestMapping("vehicles")
 public class VehicleController {
 	
 	@Autowired
@@ -24,7 +24,7 @@ public class VehicleController {
 		return new ResponseEntity<Object>(service.createVehicle(vehicle), HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Object> getVehicles(){
 		return new ResponseEntity<Object>(service.getVehicles(), HttpStatus.OK);
 	}
@@ -34,8 +34,23 @@ public class VehicleController {
 		return new ResponseEntity<Object>(service.getVehicleById(id), HttpStatus.OK);
 	}
 	
-	public ResponseEntity<Object> updateVehicle(Vehicle vehicle, Long id){
-		return new ResponseEntity<Object>(service.updateVehicle(vehicle, id), HttpStatus.OK);
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Object> updateVehicle(@RequestBody Vehicle vehicle, @PathVariable Long id) {
+		try {
+			return new ResponseEntity<Object>(service.updateVehicle(vehicle, id), HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<Object>("Unable to update vehicle.", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Object> deleteVehicle(@PathVariable Long id) {
+		try {
+			service.deleteVehicle(id);
+			return new ResponseEntity<Object>("Successfully deleted vehicle with id: " + id, HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<Object>("Unable to delete vehicle.", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

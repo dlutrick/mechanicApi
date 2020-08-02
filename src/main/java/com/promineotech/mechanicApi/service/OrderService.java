@@ -1,11 +1,15 @@
 package com.promineotech.mechanicApi.service;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.promineotech.mechanicApi.entity.Job;
 import com.promineotech.mechanicApi.entity.Order;
+import com.promineotech.mechanicApi.entity.Product;
 import com.promineotech.mechanicApi.repository.OrderRepository;
 
 @Service
@@ -47,6 +51,30 @@ public class OrderService {
 			logger.error("Exception occurred while trying to delete order: " + id, e);
 			throw new Exception("Unable to delete order.");
 		}
+	}
+	
+	public double totalProductPrice(List<Product> products) {
+		double total = 0;
+		for(Product product : products) {
+			total += product.getPrice();
+		}
+		return total;
+	}
+	
+	public double totalServicePrice(List<Job> services) {
+		double total = 0;
+		for(Job service : services) {
+			total += service.getPrice();
+		}
+		return total;
+	}
+	
+	public double getTotalInvoice(Order order) {
+		OrderService service = new OrderService();
+		double total = 0;
+		total += service.totalProductPrice(order.getProducts());
+		total += service.totalServicePrice(order.getServices());
+		return total;
 	}
 
 }

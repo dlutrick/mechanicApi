@@ -60,7 +60,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Object> updateUser(@RequestBody User user, @PathVariable Long id) throws Exception{
+	public ResponseEntity<Object> updateUser(@RequestBody User user, @PathVariable Long id) {
 		try {
 			return new ResponseEntity<Object>(service.updateUser(user, id), HttpStatus.OK);
 		} catch(Exception e) {
@@ -69,7 +69,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteUser(@PathVariable Long id) throws Exception{
+	public ResponseEntity<Object> deleteUser(@PathVariable Long id){
 		try {
 			service.deleteUser(id);
 			return new ResponseEntity<Object>("Successfully deleted user with id: " + id, HttpStatus.OK);

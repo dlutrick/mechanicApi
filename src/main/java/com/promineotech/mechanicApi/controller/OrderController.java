@@ -53,6 +53,10 @@ public class OrderController {
 		}
 	}
 	
+	@RequestMapping(value="/{id}/totalInvoice", method=RequestMethod.GET)
+	public ResponseEntity<Object> getTotalInvoice(@RequestBody Order order){
+		return new ResponseEntity<Object>(service.getTotalInvoice(order), HttpStatus.OK);
+	}
 	
 
 }

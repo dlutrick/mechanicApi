@@ -21,7 +21,7 @@ public class Order {
 	private List<Job> services;
 	private List<Product> products;	
 	private LocalDate datePurchased;
-	private Float totalPrice;
+	private double totalPrice;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,12 +75,12 @@ public class Order {
 		this.datePurchased = datePurchased;
 	}
 
-	public Float getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(Float totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setTotalPrice(double d) {
+		this.totalPrice = d;
 	}
 	
 

@@ -36,7 +36,6 @@ public class VehicleService {
 			oldVehicle.setYear(vehicle.getYear());
 			oldVehicle.setCurrentMiles(vehicle.getCurrentMiles());
 			oldVehicle.setLicensePlate(vehicle.getLicensePlate());
-			oldVehicle.setVehiclePictureUrl(vehicle.getVehiclePictureUrl());
 			return repo.save(oldVehicle);
 		} catch(Exception e) {
 			logger.error("Exception occurred while trying to update vehicle: " + id, e);

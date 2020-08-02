@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,7 +17,6 @@ public class Vehicle {
 	private String year;
 	private String currentMiles;
 	private String licensePlate;
-	private String vehiclePictureUrl;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +29,7 @@ public class Vehicle {
 	}
 
 	@ManyToOne
+	@JoinColumn(name="userId")
 	public User getUser() {
 		return user;
 	}
@@ -75,14 +76,6 @@ public class Vehicle {
 
 	public void setLicensePlate(String licensePlate) {
 		this.licensePlate = licensePlate;
-	}
-
-	public String getVehiclePictureUrl() {
-		return vehiclePictureUrl;
-	}
-
-	public void setVehiclePictureUrl(String vehiclePictureUrl) {
-		this.vehiclePictureUrl = vehiclePictureUrl;
 	}
 
 }

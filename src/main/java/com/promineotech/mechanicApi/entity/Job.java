@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Job {
 	
@@ -15,6 +17,8 @@ public class Job {
 	private String name;
 	private String description;
 	private Float price;
+	
+	@JsonIgnore
 	private List<Order> order;
 	
 	@Id
